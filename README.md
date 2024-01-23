@@ -33,3 +33,9 @@ npx webpack ./src/index.js --mode=production
 ## webpack配置文件
 
 > 名称必须为*webpack.config.js*
+
+## 开发模式的意义
+
+1. 将代码进行编译
+
+2. 代码规范检查
