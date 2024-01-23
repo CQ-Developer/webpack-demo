@@ -97,7 +97,7 @@ module: {
     rules: {
         {
             test: /\.css$/,
-            // less-loader将less资源编译成css资源
+            // less-loader将.less资源编译成css资源
             use: ["style-loader", "css-loader", "less-loader"]
         }
     }
@@ -126,7 +126,35 @@ module: {
     rules: {
         {
             test: /\.s[ac]ss$/,
-            // sass-loader将sass/scss资源编译成css资源
+            // sass-loader将.sass/.scss资源编译成css资源
+            use: ["style-loader", "css-loader", "sass-loader"]
+        }
+    }
+}
+```
+
+## 处理stylus资源
+
+> 安装*stylus*和*stylus-loader*
+
+```shell
+npm install stylus stylus-loader --save-dev
+```
+
+> 在entry中引入stylus资源
+
+```javascript
+import "./stylus/index.styl";
+```
+
+> 在*webpack.config.js*中配置stylus-loader
+
+```javascript
+module: {
+    rules: {
+        {
+            test: /\.styl$/,
+            // stylus-loader将.styl资源编译成css资源
             use: ["style-loader", "css-loader", "sass-loader"]
         }
     }

@@ -11,5 +11,8 @@ import "./less/index.less";
 import "./sass/index.sass"
 import "./sass/index.scss"
 
+// 引入stylus资源
+import "./stylus/index.styl"
+
 console.log(count(2, 1));
 console.log(sum(1, 2, 3, 4, 5));
