@@ -39,3 +39,35 @@ npx webpack ./src/index.js --mode=production
 1. 将代码进行编译
 
 2. 代码规范检查
+
+## 处理样式资源
+
+> 安装*css-loader*
+
+```shell
+npm i -D css-loader style-loader
+```
+
+> 在entry中引入
+
+```javascript
+import "./css/index.css";
+```
+
+> 配置webpack.config.js
+
+```javascript
+module: {
+    rules: {
+        {
+            // 正则表达式判断哪些文件需要处理
+            test: /\.css$/,
+            // 使用哪些loader来处理该资源
+            // 顺序从右到左
+            // style-loader将JS中的css通过创建script标签的方式添加到html文件中
+            // css-loader将css资源编译成commonJS模块
+            use: ["style-loader", "css-loader"]
+        }
+    }
+}
+```
