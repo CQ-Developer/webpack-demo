@@ -29,3 +29,7 @@ npx webpack ./src/index.js --mode=production
 - `mode(模式)`
     - 开发模式：development
     - 生产模式：production
+
+## webpack配置文件
+
+> 名称必须为*webpack.config.js*
