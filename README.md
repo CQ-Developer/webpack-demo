@@ -1,17 +1,21 @@
 # webpack-demo
+
 demo for webpack
 
 ## 安装
+
 ```shell
 npm i webpack webpack-cli --save-dev
 ```
 
 ## 开发打包
+
 ```shell
 npx webpack ./src/index.js --mode=development
 ```
 
 ## 生产环境打包
+
 ```shell
 npx webpack ./src/index.js --mode=production
 ```
@@ -40,12 +44,12 @@ npx webpack ./src/index.js --mode=production
 
 2. 代码规范检查
 
-## 处理样式资源
+## 处理CSS样式资源
 
-> 安装*css-loader*
+> 安装*css-loader*和*style-loader*
 
 ```shell
-npm i -D css-loader style-loader
+npm i css-loader style-loader --save-dev
 ```
 
 > 在entry中引入
@@ -67,6 +71,34 @@ module: {
             // style-loader将JS中的css通过创建script标签的方式添加到html文件中
             // css-loader将css资源编译成commonJS模块
             use: ["style-loader", "css-loader"]
+        }
+    }
+}
+```
+
+## 处理LESS样式资源
+
+> 安装*less*和*less-loader*
+
+```shell
+npm i less less-loader --save-dev
+```
+
+> 在entry中引入less资源
+
+```javascript
+import "./less/index.less";
+```
+
+> 在*webpack.config.js*中配置less-loader
+
+```javascript
+module: {
+    rules: {
+        {
+            test: /\.css$/,
+            // less-loader将less资源编译成css资源
+            use: ["style-loader", "css-loader", "less-loader"]
         }
     }
 }
