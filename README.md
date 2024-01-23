@@ -103,3 +103,32 @@ module: {
     }
 }
 ```
+
+## 处理SASS样式资源
+
+> 安装*sass*和*sass-loader*
+
+```shell
+npm install sass sass-loader --save-dev
+```
+
+> 在entry中引入sass资源
+
+```javascript
+import "./sass/index.sass";
+import "./sass/index.scss";
+```
+
+> 在*webpack.config.js*中配置sass-loader
+
+```javascript
+module: {
+    rules: {
+        {
+            test: /\.s[ac]ss$/,
+            // sass-loader将sass/scss资源编译成css资源
+            use: ["style-loader", "css-loader", "sass-loader"]
+        }
+    }
+}
+```
