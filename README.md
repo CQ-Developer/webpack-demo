@@ -365,3 +365,27 @@ module.exports = {
     ]
 };
 ```
+
+## 开发服务器与自动化
+
+> 安装*webpack-dev-server*
+
+```shell
+npm install webpack-dev-server --save-dev
+```
+
+> 在*webpack.config.js*中进行配置
+
+```javascript
+// 可以在package.json中配置script让项目自动启动
+module.exports ={
+    // 开发服务器不会输出资源
+    devServer: {
+        host: "localhost",
+        port: 3000,
+        static: "./dist"
+        // 自动打开浏览器
+        open: true,
+    }
+};
+```
