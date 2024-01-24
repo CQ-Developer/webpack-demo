@@ -178,6 +178,34 @@ module: {
                     // 小于该体积(10kb)的图片转base64
                     maxSize: 10 * 1024
                 }
+            },
+            // 指定图片的输出目录和文件名
+            // [hash:10]表示文件的hash值，10表示只取hash值的前10位
+            // [ext]文件的扩展名
+            // [query]请求的路径查询参数
+            generator: {
+                filename: "static/images/[hash:10][ext][query]"
+            }
+        }
+    ]
+}
+```
+
+## 处理字体图标文件
+
+默认就可以打包字体图标资源
+
+> 在*webpack.config.js*中配置字体图标的输出目录
+
+```javascript
+module: {
+    rules: [
+        {
+            test: /\.(ttf|woff2?)$/,
+            // 指定资源类型
+            type: "asset/resource",
+            generator: {
+                filename: "static/fonts/[hash:10][ext][query]"
             }
         }
     ]

@@ -3,6 +3,8 @@ import sum from "./js/sum.js";
 
 // 在入口处引入使得webpack能打包该资源
 import "./css/index.css";
+// 引入字体图标文件
+import "./css/iconfont.css"
 
 // 引入less资源
 import "./less/index.less";
