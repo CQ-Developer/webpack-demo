@@ -341,3 +341,27 @@ module.exports = {
     ]
 }
 ```
+
+## 处理HTML资源
+
+> 安装*html-webpack-plugin*插件
+
+```shell
+npm install html-webpack-plugin --save-dev
+```
+
+> 在*webpack.config.js*中进行配置
+
+```javascript
+// 引入插件
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+// 配置插件
+module.exports = {
+    plugins: [
+        new HtmlWebpackPlugin({
+            // 会自动引入打包生成的资源
+            template: path.resolve(__dirname, "src/html/index.html")
+        })
+    ]
+};
+```
