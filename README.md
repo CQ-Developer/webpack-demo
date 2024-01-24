@@ -295,3 +295,49 @@ module.exports = {
     }
 };
 ```
+
+### 兼容性-babel
+
+[Babel](https://babeljs.io/)是一个`JavaScript`编译器，主要功能是将`ECMAScript 2015+`的代码转换成向后兼容的版本，让代码适配一些老环境。
+
+> 安装*babel-loader*
+```shell
+npm install babel-loader @babel/core @babel/preset-env --save-dev
+```
+
+> 在*webpack.config.js*文件中进行配置
+
+```javascript
+module.exports = {
+    module: {
+        rules: [
+            {
+                test: /\.js&/,
+                // 排除node_modules目录下的JS文件
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        // 下面这些配置可以在babel的配置文件中进行独立配置
+                        presets: [
+                            ["@babel/preset-env", { targets: "defaults" }]
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+};
+```
+
+> 在根目录的*.babelrc.js*进行配置
+
+```javascript
+module.exports = {
+    presets: [
+        [
+            "@babel/preset-env"
+        ]
+    ]
+};
+```
