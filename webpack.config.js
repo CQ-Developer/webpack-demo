@@ -9,7 +9,8 @@ module.exports = {
     output: {
         // 绝对路径
         path: path.resolve(__dirname, "dist"),
-        filename: "index.js",
+        // 设置入口文件的输出目录
+        filename: "static/js/index.js",
         clean: true
     },
 
@@ -37,8 +38,15 @@ module.exports = {
                 type: "asset",
                 parser: {
                     dataUrlCondition: {
-                        maxSize: 200 * 1024
+                        maxSize: 10 * 1024
                     }
+                },
+                // 指定图片的输出目录和文件名
+                // [hash:10]表示文件的hash值，10表示只取hash值的前10位
+                // [ext]文件的扩展名
+                // [query]请求的路径查询参数
+                generator: {
+                    filename: "static/images/[hash:10][ext][query]"
                 }
             }
         ]
