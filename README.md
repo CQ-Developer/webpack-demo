@@ -231,3 +231,67 @@ module: {
     ]
 }
 ```
+
+## 处理JS资源
+
+### 代码检查-eslint
+
+[eslint](https://eslint.org/)是一个js和jsx的代码检查工具
+
+> 可使用的配置文件名称
+
+- .eslintrc
+
+- .eslintrc.js
+
+- .eslintrc.json
+
+- 也可以在package.json中添加eslintConfig属性
+
+> 安装*eslint*和*eslint-webpack-plugin*插件
+
+```shell
+npm install eslint eslint-webpack-plugin --save-dev
+```
+
+> 在*webpack.config.js*中引入插件并进行配置
+
+```javascript
+// 引入eslint插件
+const ESLintPlugin = require("eslint-webpack-plugin");
+module.exports = {
+    plugins: [
+        new ESLintPlugin({
+            // 指定被需要检查的目录
+            context: path.resolve(__dirname, "src")
+        })
+    ]
+};
+```
+
+> 在项目根目录添加*eslintrc.js*配置文件
+
+```javascript
+module.exports = {
+    extends: [
+        // 继承 ESLint 的官方规则
+        "eslint:recommended"
+    ],
+    env: {
+        // 启用node全局变量
+        node: true,
+        // 启用浏览器全局变量
+        browser: true
+    },
+    parserOptions: {
+        // 指定使用ES语法版本
+        ecmaVersion: 6,
+        // 指定使用ES模块化
+        sourceType: "module"
+    },
+    rules: {
+        // 禁用var申明变量
+        "no-var": 2
+    }
+};
+```
