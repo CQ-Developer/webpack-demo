@@ -30,6 +30,15 @@ module.exports = {
             {
                 test: /\.styl$/,
                 use: ["style-loader", "css-loader", "stylus-loader"]
+            },
+            {
+                test: /\.(png|jpe?g|gif|webp|svg)$/,
+                type: "asset",
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 200 * 1024
+                    }
+                }
             }
         ]
     },

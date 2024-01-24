@@ -160,3 +160,26 @@ module: {
     }
 }
 ```
+
+## 处理图片资源
+
+默认就可以打包图片资源。
+
+> 在*webpack.config.js*中配置优化图片资源
+
+```javascript
+module: {
+    rules: [
+        {
+            test: /\.(png|jpe?g|gif|webp|svg)$/,
+            type: "asset",
+            parser: {
+                dataUrlCondition: {
+                    // 小于该体积(10kb)的图片转base64
+                    maxSize: 10 * 1024
+                }
+            }
+        }
+    ]
+}
+```
