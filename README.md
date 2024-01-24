@@ -211,3 +211,23 @@ module: {
     ]
 }
 ```
+
+## 处理其他资源
+
+> 在*webpack.config.js*中配置其他资源输出目录
+
+```javascript
+module: {
+    rules: [
+        {
+            // 这里以视频文件为例、也可以是excel文件、音乐文件等等
+            test: /\.(mp4|webm)$/,
+            // 指定资源类型
+            type: "asset/resource",
+            generator: {
+                filename: "static/media/[hash:10][ext][query]"
+            }
+        }
+    ]
+}
+```

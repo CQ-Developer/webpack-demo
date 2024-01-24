@@ -52,6 +52,13 @@ module.exports = {
                 generator: {
                     filename: "static/fonts/[hash:10][ext][query]"
                 }
+            },
+            {
+                test: /\.(mp4|webm)$/,
+                type: "asset/resource",
+                generator: {
+                    filename: "static/media/[hash:10][ext][query]"
+                }
             }
         ]
     },

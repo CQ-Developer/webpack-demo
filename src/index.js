@@ -16,5 +16,8 @@ import "./sass/index.scss"
 // 引入stylus资源
 import "./stylus/index.styl"
 
+// 引入其他资源
+import "./media/flower.webm"
+
 console.log(count(2, 1));
 console.log(sum(1, 2, 3, 4, 5));
