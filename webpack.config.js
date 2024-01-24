@@ -11,6 +11,7 @@ module.exports = {
         path: path.resolve(__dirname, "dist"),
         // 设置入口文件的输出目录
         filename: "static/js/index.js",
+        // 自动清空上次打包结果
         clean: true
     },
 
