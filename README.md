@@ -330,14 +330,14 @@ module.exports = {
 };
 ```
 
-> 在根目录的*.babelrc.js*进行配置
+> 在根目录的*babel.config.json*进行配置
 
-```javascript
-module.exports = {
-    presets: [
+```json
+{
+    "presets": [
         [
             "@babel/preset-env"
         ]
     ]
-};
+}
 ```
