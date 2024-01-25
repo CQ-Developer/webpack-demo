@@ -395,3 +395,32 @@ module.exports ={
 ```shell
 npx webpack server
 ```
+
+## 开发模式和生产模式
+
+```shell
+# 开发模式
+npx webpack server --config ./config/webpack.dev.js
+# 生产模式
+npx webpack --config ./config/webpack.prod.js
+```
+
+> 在*package.json*中添加`scripts`
+
+```json
+{
+    "scripts": {
+        "start": "webpack server --config ./config/webpack.dev.js",
+        "build": "webpack --config ./config/webpack.prod.js"
+    }
+}
+```
+
+> 运行
+
+```shell
+# 开发
+npm start
+# 生产
+npm run build
+```

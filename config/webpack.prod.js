@@ -4,16 +4,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     // entry
-    // 绝对路径
     entry: "./src/index.js",
 
     // output
     output: {
-        // 绝对路径
-        path: path.resolve(__dirname, "dist"),
-        // 设置入口文件的输出目录
+        path: path.resolve(__dirname, "../dist"),
         filename: "static/js/index.js",
-        // 自动清空上次打包结果
         clean: true
     },
 
@@ -73,21 +69,13 @@ module.exports = {
     // plugins
     plugins: [
         new ESLintPlugin({
-            context: path.resolve(__dirname, "src")
+            context: path.resolve(__dirname, "../src")
         }),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, "src/html/index.html")
+            template: path.resolve(__dirname, "../src/html/index.html")
         })
     ],
 
     // mode
-    mode: "development",
-
-    // 开发服务器
-    devServer: {
-        host: "localhost",
-        port: 3000,
-        open: true,
-        static: "./dist"
-    }
+    mode: "production"
 };
