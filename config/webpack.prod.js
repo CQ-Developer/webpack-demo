@@ -2,6 +2,7 @@ const path = require("node:path");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 // 封装通用的样式loader函数
 function getStyleLoader(loader) {
@@ -86,6 +87,12 @@ module.exports = {
                     filename: "static/media/[hash:10][ext][query]"
                 }
             }
+        ]
+    },
+
+    optimization: {
+        minimizer: [
+            new CssMinimizerPlugin()
         ]
     },
 

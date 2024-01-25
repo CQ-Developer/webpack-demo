@@ -508,3 +508,26 @@ module.exports = {
     ]
 }
 ```
+
+## CSS压缩
+
+> 安装*css-minimizer-webpack-plugin*插件
+
+```shell
+npm install css-minimizer-webpack-plugin --save-dev
+```
+
+> 在*webpack.prod.js*中配置插件
+
+```javascript
+// 引入插件
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+// 配置插件
+module.exports = {
+    optimization: {
+        minimizer: [
+            new CssMinimizerPlugin()
+        ]
+    }
+};
+```
