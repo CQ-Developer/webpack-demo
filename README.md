@@ -572,7 +572,7 @@ module.exports = {
 ```javascript
 // 注意HMR原本不支持JS资源的热替换，所以针对JS资源需要单独处理
 if (module.hot) {
-    module.hot.accept();
-    module.hot.accept();
+    module.hot.accept("./js/count.js");
+    module.hot.accept("./js/sum.js");
 }
 ```
