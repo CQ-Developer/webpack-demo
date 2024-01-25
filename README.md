@@ -576,3 +576,28 @@ if (module.hot) {
     module.hot.accept("./js/sum.js");
 }
 ```
+
+## 使用oneOf让每中资源制备一个rule处理
+
+默认情况下，每种资源都会尝试*module.rules*中的所有rule，通过oneOf可以提升效率，让资源仅执行一个rule就退出
+
+> 在*webpack.config.js*中添加*oneOf*
+
+```javascript
+module.exports = {
+    module: {
+        rules: [
+            {
+                // 添加oneOf配置
+                oneOf: [
+                    {
+                        test: /\.(?:js|mjs|cjs)$/,
+                        exclude: /node_modules/,
+                        use: ["babel-loader"]
+                    }
+                ]
+            }
+        ]
+    }
+};
+```

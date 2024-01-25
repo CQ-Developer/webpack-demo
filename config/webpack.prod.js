@@ -41,51 +41,55 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(?:js|mjs|cjs)$/,
-                exclude: /node_modules/,
-                use: ["babel-loader"]
-            },
-            {
-                test: /\.css$/,
-                use: getStyleLoader()
-            },
-            {
-                test: /\.less$/,
-                use: getStyleLoader("less-loader")
-            },
-            {
-                test: /\.s[ac]ss/,
-                use: getStyleLoader("sass-loader")
-            },
-            {
-                test: /\.styl$/,
-                use: getStyleLoader("stylus-loader")
-            },
-            {
-                test: /\.(png|jpe?g|gif|webp|svg)$/,
-                type: "asset",
-                parser: {
-                    dataUrlCondition: {
-                        maxSize: 10 * 1024
+                oneOf: [
+                    {
+                        test: /\.(?:js|mjs|cjs)$/,
+                        exclude: /node_modules/,
+                        use: ["babel-loader"]
+                    },
+                    {
+                        test: /\.css$/,
+                        use: getStyleLoader()
+                    },
+                    {
+                        test: /\.less$/,
+                        use: getStyleLoader("less-loader")
+                    },
+                    {
+                        test: /\.s[ac]ss/,
+                        use: getStyleLoader("sass-loader")
+                    },
+                    {
+                        test: /\.styl$/,
+                        use: getStyleLoader("stylus-loader")
+                    },
+                    {
+                        test: /\.(png|jpe?g|gif|webp|svg)$/,
+                        type: "asset",
+                        parser: {
+                            dataUrlCondition: {
+                                maxSize: 10 * 1024
+                            }
+                        },
+                        generator: {
+                            filename: "static/images/[hash:10][ext][query]"
+                        }
+                    },
+                    {
+                        test: /\.(ttf|woff2?)$/,
+                        type: "asset/resource",
+                        generator: {
+                            filename: "static/fonts/[hash:10][ext][query]"
+                        }
+                    },
+                    {
+                        test: /\.(mp4|webm)$/,
+                        type: "asset/resource",
+                        generator: {
+                            filename: "static/media/[hash:10][ext][query]"
+                        }
                     }
-                },
-                generator: {
-                    filename: "static/images/[hash:10][ext][query]"
-                }
-            },
-            {
-                test: /\.(ttf|woff2?)$/,
-                type: "asset/resource",
-                generator: {
-                    filename: "static/fonts/[hash:10][ext][query]"
-                }
-            },
-            {
-                test: /\.(mp4|webm)$/,
-                type: "asset/resource",
-                generator: {
-                    filename: "static/media/[hash:10][ext][query]"
-                }
+                ]
             }
         ]
     },
