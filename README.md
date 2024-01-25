@@ -646,12 +646,29 @@ module.exports = {
                 use: {
                     loader: "babel-loader",
                     options: {
+                        // 开启缓存
                         cacheDirectory: true,
+                        // 关闭缓存压缩，该选项可以不进行设置
                         cacheCompression: false
                     }
                 }
             }
         ]
     }
+};
+```
+
+## 开启eslint缓存提高打包性能
+
+> 在*webpack.config.js*中进行配置
+
+```javascript
+module.exports = {
+    plugins: [
+        new ESLintPlugin({
+            // 该选项默认启用, 不需要额外配置, 这里仅作展示
+            cache: true
+        })
+    ]
 };
 ```
