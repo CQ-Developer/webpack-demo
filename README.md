@@ -551,3 +551,28 @@ module.exports = {
     devtool: "eval-source-map"
 };
 ```
+
+## 提升开发模式的打包构建速度
+
+`Hot Moudle Replacement - HMR` 在程序运行中替换某个模块而不需要重新加载所有模块, `webpack 5` 默认开启了此功能，此功能**不推荐**在生产环境中使用
+
+> 在*webpack.dev.js*的*devServer*属性中开启此功能
+
+```javascript
+module.exports = {
+    devServer: {
+        // 注意该功能在 webpack 5 中默认就启动了，这里只是进行说明
+        hot: true
+    }
+};
+```
+
+> 在*index.js*中配置需要热替换的JS资源
+
+```javascript
+// 注意HMR原本不支持JS资源的热替换，所以针对JS资源需要单独处理
+if (module.hot) {
+    module.hot.accept();
+    module.hot.accept();
+}
+```

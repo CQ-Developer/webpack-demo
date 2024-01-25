@@ -21,3 +21,9 @@ import "./media/flower.webm"
 
 console.log(count(2, 1));
 console.log(sum(1, 2, 3, 4, 5));
+
+// 热替换JS资源
+if (module.hot) {
+    module.hot.accept("./js/count.js");
+    module.hot.accept("./js/sum.js");
+}
