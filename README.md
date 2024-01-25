@@ -531,3 +531,23 @@ module.exports = {
     }
 };
 ```
+
+## source maps
+
+源代码映射，方便找到源代码出错位置
+
+> 在*webpack.prod.js*进行配置
+
+```javascript
+module.exports = {
+    devtool: "source-map"
+};
+```
+
+> 在*webpack.dev.js*进行配置
+
+```javascript
+module.exports = {
+    devtool: "eval-source-map"
+};
+```

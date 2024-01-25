@@ -110,5 +110,7 @@ module.exports = {
     ],
 
     // mode
-    mode: "production"
+    mode: "production",
+    // source maps
+    devtool: "source-map"
 };
