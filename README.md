@@ -424,3 +424,38 @@ npm start
 # 生产
 npm run build
 ```
+
+## 生产环境单独处理CSS
+
+目的：不要将css打包到js中，而是打包到独立的css文件中并通过link标签引入
+
+> 安装*mini-css-extract-plugin*插件
+
+```shell
+npm install mini-css-extract-plugin --save-dev
+```
+
+> 在*webpack.prod.js*中进行配置
+
+```javascript
+// 引入插件
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+module.exports = {
+    // 使用插件
+    plugins: {
+        new MiniCssExtractPlugin({
+            filename: "static/css/main.css"
+        })
+    },
+    // 修改loader
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, "css-loader"]
+            }
+        ]
+    }
+};
+```
