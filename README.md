@@ -534,7 +534,7 @@ module.exports = {
 
 ## source maps
 
-源代码映射，方便找到源代码出错位置
+源代码映射，方便找到源代码出错位置，查看[可选配置项](https://webpack.js.org/configuration/devtool/#devtool)
 
 > 在*webpack.prod.js*进行配置
 
