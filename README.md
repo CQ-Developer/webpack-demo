@@ -459,3 +459,52 @@ module.exports = {
     }
 };
 ```
+## CSS兼容性
+
+> 安装*postcss*
+
+```shell
+npm install postcss postcss-loader postcss-preset-env --save-dev
+```
+
+> 在*webpack.prod.js*中进行配置
+
+```javascript
+module.exports = {
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader",
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    [
+                                        "postcss-preset-env"
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+};
+```
+
+> 在*package.json*中添加配置项[browserslist](https://github.com/browserslist/browserslist#queries)属性
+
+```json
+{
+    "browserslist": [
+        "last 2 version",
+        "> 1%",
+        "not dead"
+    ]
+}
+```
