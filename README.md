@@ -601,3 +601,34 @@ module.exports = {
     }
 };
 ```
+
+## 排除不需要处理的资源
+
+- includ: 只处理包含的资源
+
+- exclude: 排除不需要处理的资源
+
+> 在*webpack.config.js*中排除不需要处理的资源
+
+```javascript
+module.exports = {
+    module: {
+        rules: [
+            {
+                test: /\.(?:js|mjs|cjs)$/,
+                // 排除node_modules中的资源
+                exclude: /node_modules/,
+                use: ["babel-loader"]
+            }
+        ]
+    },
+    plugins: [
+        new ESLintPlugin({
+            context: path.resolve(__dirname, "../src"),
+            // 排除node_modules中的资源
+            // 这是默认值可以不写，这里只是进行说明
+            exclude: "node_modules"
+        })
+    ]
+};
+```

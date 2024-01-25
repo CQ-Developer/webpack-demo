@@ -73,7 +73,8 @@ module.exports = {
     // plugins
     plugins: [
         new ESLintPlugin({
-            context: path.resolve(__dirname, "../src")
+            context: path.resolve(__dirname, "../src"),
+            exclude: "node_modules"
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "../src/html/index.html")
