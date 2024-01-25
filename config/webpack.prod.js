@@ -3,6 +3,28 @@ const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+// 封装通用的样式loader函数
+function getStyleLoader(loader) {
+    let arr = [
+        MiniCssExtractPlugin.loader,
+        "css-loader",
+        {
+            loader: "postcss-loader",
+            options: {
+                postcssOptions: {
+                    plugins: [
+                        [
+                            "postcss-preset-env"
+                        ]
+                    ]
+                }
+            }
+        },
+        loader
+    ];
+    return arr.filter(Boolean);
+}
+
 module.exports = {
     // entry
     entry: "./src/index.js",
@@ -24,82 +46,19 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    "css-loader",
-                    {
-                        loader: "postcss-loader",
-                        options: {
-                            postcssOptions: {
-                                plugins: [
-                                    [
-                                        "postcss-preset-env"
-                                    ]
-                                ]
-                            }
-                        }
-                    }
-                ]
+                use: getStyleLoader()
             },
             {
                 test: /\.less$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    "css-loader",
-                    {
-                        loader: "postcss-loader",
-                        options: {
-                            postcssOptions: {
-                                plugins: [
-                                    [
-                                        "postcss-preset-env"
-                                    ]
-                                ]
-                            }
-                        }
-                    },
-                    "less-loader"
-                ]
+                use: getStyleLoader("less-loader")
             },
             {
                 test: /\.s[ac]ss/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    "css-loader",
-                    {
-                        loader: "postcss-loader",
-                        options: {
-                            postcssOptions: {
-                                plugins: [
-                                    [
-                                        "postcss-preset-env"
-                                    ]
-                                ]
-                            }
-                        }
-                    },
-                    "sass-loader"
-                ]
+                use: getStyleLoader("sass-loader")
             },
             {
                 test: /\.styl$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    "css-loader",
-                    {
-                        loader: "postcss-loader",
-                        options: {
-                            postcssOptions: {
-                                plugins: [
-                                    [
-                                        "postcss-preset-env"
-                                    ]
-                                ]
-                            }
-                        }
-                    },
-                    "stylus-loader"
-                ]
+                use: getStyleLoader("stylus-loader")
             },
             {
                 test: /\.(png|jpe?g|gif|webp|svg)$/,
