@@ -389,3 +389,9 @@ module.exports ={
     }
 };
 ```
+
+> 启动开发服务器
+
+```shell
+npx webpack server
+```
