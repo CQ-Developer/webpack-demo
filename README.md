@@ -312,7 +312,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js&/,
+                test: /\.js$/,
                 // 排除node_modules目录下的JS文件
                 exclude: /node_modules/,
                 use: {
@@ -630,5 +630,28 @@ module.exports = {
             exclude: "node_modules"
         })
     ]
+};
+```
+
+## 开启babel-loaderd缓存提高打包性能
+
+> 在*webpack.config.js*中进行配置
+
+```javascript
+module.exports = {
+    module: {
+        rules: [
+            {
+                test: /\.(?:js|mjs|cjs)$/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        cacheDirectory: true,
+                        cacheCompression: false
+                    }
+                }
+            }
+        ]
+    }
 };
 ```

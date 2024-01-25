@@ -45,7 +45,13 @@ module.exports = {
                     {
                         test: /\.(?:js|mjs|cjs)$/,
                         exclude: /node_modules/,
-                        use: ["babel-loader"]
+                        use: {
+                            loader: "babel-loader",
+                            options: {
+                                cacheDirectory: true,
+                                cacheCompression: false
+                            }
+                        }
                     },
                     {
                         test: /\.css$/,
