@@ -3,6 +3,7 @@ const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 // 封装通用的样式loader函数
 function getStyleLoader(loader) {
@@ -45,13 +46,18 @@ module.exports = {
                     {
                         test: /\.(?:js|mjs|cjs)$/,
                         exclude: /node_modules/,
-                        use: {
-                            loader: "babel-loader",
-                            options: {
-                                cacheDirectory: true,
-                                cacheCompression: false
+                        use: [
+                            {
+                                loader: "thread-loader"
+                            },
+                            {
+                                loader: "babel-loader",
+                                options: {
+                                    cacheDirectory: true,
+                                    cacheCompression: false
+                                }
                             }
-                        }
+                        ]
                     },
                     {
                         test: /\.css$/,
@@ -101,8 +107,12 @@ module.exports = {
     },
 
     optimization: {
+        minimize: true,
         minimizer: [
-            new CssMinimizerPlugin()
+            new CssMinimizerPlugin(),
+            new TerserPlugin({
+                parallel: true
+            })
         ]
     },
 
@@ -110,7 +120,8 @@ module.exports = {
     plugins: [
         new ESLintPlugin({
             context: path.resolve(__dirname, "../src"),
-            exclude: "node_modules"
+            exclude: "node_modules",
+            threads: true
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "../src/html/index.html")

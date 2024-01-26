@@ -672,3 +672,83 @@ module.exports = {
     ]
 };
 ```
+
+## 启用多进程提升打包性能
+
+> 安装*thread-loader*
+
+```shell
+npm install thread-loader --save-dev
+```
+
+> 在*babel-loader*前添加*thread-loader*
+
+```javascript
+module.exports = {
+    module: {
+        rules: [
+            oneOf: [
+                {
+                    test: /\.(?:js|mjs|cjs)$/,
+                    exclude: /node_modules/,
+                    use: [
+                        {
+                            loader: "thread-loader",
+                            options: {
+                                // 配置线程数量，默认是CPU核数减1
+                                workers: 2
+                            }
+                        },
+                        {
+                            loader: "babel-loader",
+                            options: {
+                                cacheDirectory: true,
+                                cacheCompression: false
+                            }
+                        }
+                    ]
+                }
+            ]
+        ]
+    }
+};
+```
+
+> 在*webpack.config.js*中配置*ESLintPlugin*多线程
+
+```javascript
+module.exports = {
+    plugins: [
+        new ESLintPlugin({
+            // 可以配置为true使其自动决定线程数量或给定具体数量
+            threads: 2
+        })
+    ]
+};
+```
+
+> 安装*terser-webpack-plugin*插件
+
+```shell
+npm install terser-webpack-plugin --save-dev
+```
+
+> 在*webpack.config.js*中进行配置
+
+```javascript
+// 引入插件
+const TerserPlugin = require("terser-webpack-plugin");
+module.exports = {
+    optimization: {
+        minimize: true,
+        minimizer: [
+            // 配置插件
+            new TerserPlugin({
+                // 开启多进程处理，默认并发数 os.cput().length - 1
+                // 也可以传入数字进行指定
+                parallel: true
+            })
+        ]
+    }
+};
+```

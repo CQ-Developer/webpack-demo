@@ -21,13 +21,18 @@ module.exports = {
                     {
                         test: /\.(?:js|mjs|cjs)$/,
                         exclude: /node_modules/,
-                        use: {
-                            loader: "babel-loader",
-                            options: {
-                                cacheDirectory: true,
-                                cacheCompression: false
+                        use: [
+                            {
+                                loader: "thread-loader"
+                            },
+                            {
+                                loader: "babel-loader",
+                                options: {
+                                    cacheDirectory: true,
+                                    cacheCompression: false
+                                }
                             }
-                        }
+                        ]
                     },
                     {
                         test: /\.css$/,
@@ -80,7 +85,8 @@ module.exports = {
     plugins: [
         new ESLintPlugin({
             context: path.resolve(__dirname, "../src"),
-            exclude: "node_modules"
+            exclude: "node_modules",
+            threads: true
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "../src/html/index.html")
