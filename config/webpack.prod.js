@@ -35,8 +35,8 @@ module.exports = {
     // output
     output: {
         path: path.resolve(__dirname, "../dist"),
-        filename: "static/js/[name].js",
-        chunkFilename: "static/js/[name].chunk.js",
+        filename: "static/js/[name].[contenthash:10].js",
+        chunkFilename: "static/js/[name].[contenthash:10].chunk.js",
         assetModuleFilename: "static/asset/[hash:10][ext][query]",
         clean: true
     },
@@ -126,6 +126,9 @@ module.exports = {
         ],
         splitChunks: {
             chunks: "all"
+        },
+        runtimeChunk: {
+            name: entrypoint => `runtime-${entrypoint.name}.js`
         }
     },
 
@@ -140,8 +143,8 @@ module.exports = {
             template: path.resolve(__dirname, "../src/html/index.html")
         }),
         new MiniCssExtractPlugin({
-            filename: "static/css/[name].css",
-            chunkFilename: "static/css/[name].chunk.css"
+            filename: "static/css/[name].[contenthash:10].css",
+            chunkFilename: "static/css/[name].[contenthash:10].chunk.css"
         })
     ],
 

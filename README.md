@@ -969,3 +969,32 @@ import(/* webpackPrefetch: true */ "./js/math.js").then(({ sum }) => console.log
 // 在动态导入模块中通过这种方式实现 preload
 import(/* webpackPreload: true */ "./js/math.js").then(({ sum }) => console.log(sum(1, 2, 3)));
 ```
+
+## 优化网络缓存
+
+> 通过*contenthash*优化缓存
+
+```javascript
+module.exports = {
+    // 通过[contenthash]让webpack根据内容生成hash值
+    output: {
+        filename: "static/js/[name].[contenthash:10].js",
+        chunkFilename: "static/js/[name].[contenthash:10].chunk.js"
+    },
+    // 通过[contenthash]让webpack根据内容生成hash值
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: "static/css/[name].[contenthash:10].css",
+            chunkFilename: "static/css/[name].[contenthash:10].chunk.css"
+        })
+    ],
+    // runtimeChunk将模块之间相互依赖的关系提取成单独的文件
+    // 当a模块放生变化，只会影响a的文件命名，不会影响其他模块的文件名
+    // 从而保证其他模块可以被浏览器正常缓存
+    optimization: {
+        runtimeChunk: {
+            name: (entrypoint) => `runtime-${entrypoint.name}.js`
+        }
+    }
+};
+```
