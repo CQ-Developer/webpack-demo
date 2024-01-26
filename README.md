@@ -801,3 +801,43 @@ module.exports = {
     ]
 }
 ```
+
+## 压缩图片
+
+> 安装[image-minimizer-webpack-plugin](https://webpack.js.org/plugins/image-minimizer-webpack-plugin/)插件
+
+```shell
+# 安装核心插件
+npm install image-minimizer-webpack-plugin imagemin --save-dev
+# 下载无损压缩组件
+npm install imagemin-gifsicle imagemin-jpegtran imagemin-optipng imagemin-svgo --save-dev
+# 下载有损压缩组件
+npm install imagemin-gifsicle imagemin-mozjpeg imagemin-pngquant imagemin-svgo --save-dev
+```
+
+> 在*webpack.config.js*中进行配置
+
+```javascript
+// 引入插件
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+// 配置插件
+module.exports = {
+    optimization: {
+        minimizer: [
+            new ImageMinimizerPlugin({
+                minimizer: {
+                    implementation: ImageMinimizerPlugin.imageminMinify,
+                    options: {
+                        plugins: [
+                            "imagemin-gifsicle",
+                            "imagemin-mozjpeg",
+                            "imagemin-pngquant",
+                            "imagemin-svgo"
+                        ]
+                    }
+                }
+            })
+        ]
+    }
+};
+```

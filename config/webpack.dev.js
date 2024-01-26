@@ -1,6 +1,7 @@
 const path = require("node:path");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 module.exports = {
     // 相对路径
@@ -95,6 +96,29 @@ module.exports = {
             template: path.resolve(__dirname, "../src/html/index.html")
         })
     ],
+
+    optimization: {
+        minimizer: [
+            new ImageMinimizerPlugin({
+                minimizer: [
+                    {
+                        implementation: ImageMinimizerPlugin.sharpMinify
+                    },
+                    {
+                        implementation: ImageMinimizerPlugin.svgoMinify,
+                        options: {
+                            encodeOptions: {
+                                multipass: true,
+                                plugins: [
+                                    "preset-default"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            })
+        ]
+    },
 
     // mode
     mode: "development",
