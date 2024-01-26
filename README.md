@@ -998,3 +998,27 @@ module.exports = {
     }
 };
 ```
+
+## 使用[core-js](https://github.com/zloirock/core-js?tab=readme-ov-file#index)处理es6+语法兼容性问题
+
+> 安装core-js
+
+```shell
+npm install core-js
+```
+
+> 在*babel.config.json*中进行配置
+
+```json
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "useBuiltIns": "usage",
+                "corejs": "3.35.1"
+            }
+        ]
+    ]
+}
+```

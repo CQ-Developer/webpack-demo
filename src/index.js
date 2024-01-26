@@ -32,3 +32,7 @@ if (module.hot) {
 document.getElementById("btn").onclick = function () {
     import(/* webpackChunkName: "math", webpackPrefetch: true */ "./js/math.js").then(({ sum }) => console.log(sum(1, 2, 3)));
 };
+
+// 存在兼容性的语法
+const arr = [1, 2, 3, 4];
+console.log(arr.includes(1));
