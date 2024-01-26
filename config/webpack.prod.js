@@ -35,8 +35,9 @@ module.exports = {
     // output
     output: {
         path: path.resolve(__dirname, "../dist"),
-        filename: "static/js/index.js",
-        chunkFilename: "static/js/[name].js",
+        filename: "static/js/[name].js",
+        chunkFilename: "static/js/[name].chunk.js",
+        assetModuleFilename: "static/asset/[hash:10][ext][query]",
         clean: true
     },
 
@@ -87,24 +88,15 @@ module.exports = {
                             dataUrlCondition: {
                                 maxSize: 10 * 1024
                             }
-                        },
-                        generator: {
-                            filename: "static/images/[hash:10][ext][query]"
                         }
                     },
                     {
                         test: /\.(ttf|woff2?)$/,
-                        type: "asset/resource",
-                        generator: {
-                            filename: "static/fonts/[hash:10][ext][query]"
-                        }
+                        type: "asset/resource"
                     },
                     {
                         test: /\.(mp4|webm)$/,
-                        type: "asset/resource",
-                        generator: {
-                            filename: "static/media/[hash:10][ext][query]"
-                        }
+                        type: "asset/resource"
                     }
                 ]
             }
@@ -148,7 +140,8 @@ module.exports = {
             template: path.resolve(__dirname, "../src/html/index.html")
         }),
         new MiniCssExtractPlugin({
-            filename: "static/css/main.css"
+            filename: "static/css/[name].css",
+            chunkFilename: "static/css/[name].chunk.css"
         })
     ],
 

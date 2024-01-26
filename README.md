@@ -933,3 +933,28 @@ module.exports = {
     }
 };
 ```
+
+## 统一命名
+
+> 在*webpack.config.js*中对不同资源统一命名
+
+```javascript
+module.exports = {
+    output: {
+        // 使用[name]动态获取入口文件名，并适配了多入口的情况
+        filename: "static/js/[name].js",
+        // 使用[name]对被拆分的js文件进行统一命名
+        chunkFilename: "static/js/[name].chunk.js",
+        // 对所有type为asset的资源统一命名
+        assetModuleFilename: "static/asset/[hash:10][ext][query]"
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            // 使用[name]对css文件进行统一命名
+            filename: "static/css/[name].css",
+            // 使用[name]对被拆分的css文件进行统一命名
+            chunkFilename: "static/css/[name].chunk.css"
+        })
+    ]
+};
+```
