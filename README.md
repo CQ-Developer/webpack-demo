@@ -841,3 +841,73 @@ module.exports = {
     }
 };
 ```
+
+## 使用[Code splitting](https://webpack.js.org/guides/code-splitting/)对代码进行拆分
+
+默认情况下会将所有JS代码打包到一个JS文件中，通过*code split*可以将代码拆分，按需加载
+
+> 一：多入口打包
+
+- webpack.config.js
+
+```javascript
+// 假设存在2个JS文件, a.js和b.js
+module.exports = {
+    entry: {
+        a: "./src/a.js",
+        b: "./src/b.js"
+    },
+    output: {
+        // [name]就是entry中的属性名
+        filename: "[name].js"
+    }
+};
+```
+
+> 二：将被重复引用的代码不要重复打包
+
+通过[SplitChunksPlugin](https://webpack.js.org/guides/code-splitting/#splitchunksplugin)可以进行拆分
+
+- webpack.config.js
+
+```javascript
+module.exports = {
+    optimization: {
+        splitChunks: {
+            chunks: "all"
+        }
+    }
+};
+```
+
+> 三：[动态导入](https://webpack.js.org/guides/code-splitting/#dynamic-imports)
+
+将不需要立即执行的代码，在被触发时再导入
+
+```javascript
+// 假设有一个JS文件sum.js
+export default = function sum(a, b) {
+    return a + b;
+}
+
+// 在入口文件处动态导入
+// 假设上面的sum.js绑定一个点击事件
+document.getElementById("btn").onClick = function () {
+    // 该调用返回的是一个promise对象
+    import("./sum.js")
+    .then(({ default: _ }) => {
+        console.log("模块动态加载成功.");
+        console.log("计算结果: ", _(1, 2));
+    })
+    .catch(err => {
+        console.error("动态模块加载失败:", err);
+    });
+};
+
+// .eslintrc.js需要开启动态导入识别
+module.exports = {
+    plugins: [
+        "import"
+    ]
+};
+```

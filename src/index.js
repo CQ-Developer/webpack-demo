@@ -27,3 +27,8 @@ if (module.hot) {
     module.hot.accept("./js/count.js");
     module.hot.accept("./js/sum.js");
 }
+
+// 动态导入math
+document.getElementById("btn").onclick = function () {
+    import("./js/math.js").then(({ sum }) => console.log(sum(1, 2, 3)));
+};
