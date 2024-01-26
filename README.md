@@ -752,3 +752,52 @@ module.exports = {
     }
 };
 ```
+
+## 减少代码体积
+
+### [Tree Shaking](https://webpack.js.org/guides/tree-shaking/)
+
+`webpack 5`生产模式下已经默认开启，无序进行额外配置
+
+### [Babel](https://webpack.js.org/loaders/babel-loader/#babel-is-injecting-helpers-into-each-file-and-bloating-my-code)
+
+默认情况下，`babel`会为文件插入一些代码，是体积较大，速度过慢，可以通过如下配置进行优化：
+
+> 安装@babel/plugin-transform-runtime插件
+
+```shell
+npm install @babel/plugin-transform-runtime --save-dev
+```
+
+> 在*babel-loader*中添加插件
+
+```javascript
+module.exports = {
+    module: {
+        rules: [
+            {
+                test: /\.(?:js|mjs|cjs)$/,
+                use: [
+                    {
+                        loader: "babel-loader",
+                        options: {
+                            // 引入插件
+                            plugins: ["@babel/plugin-transform-runtime"]
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+};
+```
+
+> 也可以在*babel.config.json*中进行配置
+
+```json
+{
+    "plugins": [
+        "@babel/plugin-transform-runtime"
+    ]
+}
+```
