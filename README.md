@@ -958,3 +958,14 @@ module.exports = {
     ]
 };
 ```
+
+## [Prefetching/Preloading](https://webpack.js.org/guides/code-splitting/#prefetchingpreloading-modules)进行预加载
+
+> webpack5已经对该功能内置
+
+```javascript
+// 在动态导入模块中通过这种方式实现 prefetch
+import(/* webpackPrefetch: true */ "./js/math.js").then(({ sum }) => console.log(sum(1, 2, 3)));
+// 在动态导入模块中通过这种方式实现 preload
+import(/* webpackPreload: true */ "./js/math.js").then(({ sum }) => console.log(sum(1, 2, 3)));
+```
