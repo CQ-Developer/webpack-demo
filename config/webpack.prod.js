@@ -36,6 +36,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "../dist"),
         filename: "static/js/index.js",
+        chunkFilename: "static/js/[name].js",
         clean: true
     },
 

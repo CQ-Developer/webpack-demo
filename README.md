@@ -911,3 +911,25 @@ module.exports = {
     ]
 };
 ```
+
+## 为 code splitting 动态导入的模块命名
+
+> 使用指定格式命名动态导入模块
+
+```javascript
+// 指定 webpackChunkName: "math"
+document.getElementById("btn").onclick = function () {
+    import(/* webpackChunkName: "math" */ "./js/math.js").then(({ sum }) => console.log(sum(1, 2, 3)));
+};
+```
+
+> 在*webpack.config.js*中指定*chunkFilename*
+
+```javascript
+module.exports = {
+    output: {
+        // [name]为指定的名称
+        chunkFilename: "static/js/[name].js"
+    }
+};
+```

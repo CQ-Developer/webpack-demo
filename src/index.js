@@ -30,5 +30,5 @@ if (module.hot) {
 
 // 动态导入math
 document.getElementById("btn").onclick = function () {
-    import("./js/math.js").then(({ sum }) => console.log(sum(1, 2, 3)));
+    import(/* webpackChunkName: "math" */ "./js/math.js").then(({ sum }) => console.log(sum(1, 2, 3)));
 };
