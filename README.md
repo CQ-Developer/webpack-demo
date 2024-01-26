@@ -1022,3 +1022,50 @@ npm install core-js
     ]
 }
 ```
+
+## 通过[PWA](https://webpack.js.org/guides/progressive-web-application/)提供离线访问
+
+> 安装*workbox-webpack-plugin*插件
+
+```shell
+npm install workbox-webpack-plugin --save-dev
+```
+
+> 在*webpack.config.js*中进行配置
+
+```javascript
+// 引入插件
+const WorkboxPlugin = require("workbox-webpack-plugin");
+// 配置插件
+module.exports = {
+    plugins: [
+        new WorkboxPlugin.GenerateSW({
+            clientsClaim: true,
+            skipWaiting: true
+        })
+    ]
+};
+```
+
+> 在*index.js*中[注册Workbox](https://webpack.js.org/guides/progressive-web-application/#registering-our-service-worker)
+
+```javascript
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js').then(registration => {
+            console.log('SW registered: ', registration);
+        }).catch(registrationError => {
+            console.log('SW registration failed: ', registrationError);
+        });
+    });
+}
+```
+
+> 通过静态资源服务器进行验证
+
+```shell
+# 安装静态资源服务器
+npm install serve --global
+# 启动用静态资源服务器
+serve dist
+```

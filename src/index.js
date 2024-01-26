@@ -36,3 +36,14 @@ document.getElementById("btn").onclick = function () {
 // 存在兼容性的语法
 const arr = [1, 2, 3, 4];
 console.log(arr.includes(1));
+
+// 注册ServiceWorker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js').then(registration => {
+            console.log('SW registered: ', registration);
+        }).catch(registrationError => {
+            console.log('SW registration failed: ', registrationError);
+        });
+    });
+}

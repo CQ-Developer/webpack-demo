@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const WorkboxPlugin = require("workbox-webpack-plugin");
 
 // 封装通用的样式loader函数
 function getStyleLoader(loader) {
@@ -145,6 +146,10 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "static/css/[name].[contenthash:10].css",
             chunkFilename: "static/css/[name].[contenthash:10].chunk.css"
+        }),
+        new WorkboxPlugin.GenerateSW({
+            clientsClaim: true,
+            skipWaiting: true
         })
     ],
 
